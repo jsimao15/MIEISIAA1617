@@ -10,31 +10,46 @@ Trabalho prático de avaliação, integrado no Mestrado Integrado em Engenharia 
 ### Pré-requisitos
 To run Angular 2 CLI Version you will have to install following components in your environment.
 
-Node.js: https://nodejs.org/en/
+
+
+Instalar Node.js:
+```
+https://nodejs.org/en/
+The version should be higher than v0.10.32.
+```
+
+Instalar npm:
+```
 npm: https://npmjs.com
+The version should be higher than 2.1.8.
 
 ```
-Instalar Node.js
-```
 
-```
-Atualizar npm
+Atualizar npm:
 ```
 $ npm install npm@latest -g
-
 ```
-until finished
+
+Instalar AngularCLI e dependências do projecto:
+```
+$ npm install
+```
+
+Executar servidor local:
+```
+$ cd Angular2_Player_Dashboard
+```
+```
+$ ng serve
 ```
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Angular2](https://angular.io/) - *Framework*
 
 
 ## Authors
 
-* **Jorge Simão** - *Initial work* - [jsimao15](https://github.com/jsimao15)
-* **Daniel Andrade** - *Initial work* - [dandrade111](https://github.com/dandrade111)
-* **João Fernandes** - *Initial work* - [jfernandes93](https://github.com/jfernandes93)
+* **Jorge Simão** - [jsimao15](https://github.com/jsimao15)
+* **Daniel Andrade** - [dandrade111](https://github.com/dandrade111)
+* **João Fernandes** - [jfernandes93](https://github.com/jfernandes93)
