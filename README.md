@@ -7,35 +7,32 @@ Trabalho prático de avaliação, integrado no Mestrado Integrado em Engenharia 
 * [António Nestor Ribeiro](http://haslab.uminho.pt/anr)
 * [José Creissac Campos](http://www4.di.uminho.pt/~jfc)
 
-### Pré-requisitos
+## Pré-requisitos
 To run Angular 2 CLI Version you will have to install following components in your environment.
 
-
-
-Instalar Node.js:
+### Instalar Node.js:
 ```
 https://nodejs.org/en/
 The version should be higher than v0.10.32.
 ```
 
-Instalar npm:
+### Instalar npm:
 ```
 npm: https://npmjs.com
 The version should be higher than 2.1.8.
-
 ```
 
-Atualizar npm:
+### Atualizar npm:
 ```
 $ npm install npm@latest -g
 ```
 
-Instalar AngularCLI e dependências do projecto:
+### Instalar AngularCLI e dependências do projecto:
 ```
 $ npm install
 ```
 
-Executar servidor local:
+### Executar servidor local:
 ```
 $ cd Angular2_Player_Dashboard
 ```
@@ -43,12 +40,12 @@ $ cd Angular2_Player_Dashboard
 $ ng serve
 ```
 
-## Built With
+## Desenvolvido com recurso a:
 
 * [Angular2](https://angular.io/) - *Framework*
 
 
-## Authors
+## *Developers
 
 * **Jorge Simão** - [jsimao15](https://github.com/jsimao15)
 * **Daniel Andrade** - [dandrade111](https://github.com/dandrade111)
