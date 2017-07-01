@@ -8,7 +8,7 @@ Trabalho prático de avaliação, integrado no Mestrado Integrado em Engenharia 
 * [José Creissac Campos](http://www4.di.uminho.pt/~jfc)
 
 ## Pré-requisitos
-To run Angular 2 CLI Version you will have to install following components in your environment.
+Para executar a versão do Angular.CLI é necessário instalar os seguintes componentes no ambiente de execução:
 
 ### Instalar Node.js:
 ```
@@ -45,7 +45,7 @@ $ ng serve
 * [Angular2](https://angular.io/) - *Framework*
 
 
-## *Developers
+## *Developers*
 
 * **Jorge Simão** - [jsimao15](https://github.com/jsimao15)
 * **Daniel Andrade** - [dandrade111](https://github.com/dandrade111)
