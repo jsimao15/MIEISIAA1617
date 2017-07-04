@@ -114,24 +114,24 @@
               <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <div class="col-lg-12">
-              <div class="social-box facebook" style="min-height: 225px;">
+              <div *ngIf="!isLoadingMeteo" class="social-box facebook" style="min-height: 225px;">
                 <i class="fa fa-cloud"></i>
                 <ul>
                   <li>
-                    <strong>PORTO</strong>
+                    <strong>{{tempo.cidade}}</strong>
                     <span>CIDADE</span>
                     <li>
-                      <strong>35º</strong>
+                      <strong>{{tempo.temp}}F</strong>
                       <span>TEMPERATURA</span>
                     </li>
                 </ul>
                 <ul>
                   <li style="padding-top: 10px;">
-                    <strong>36º</strong>
-                    <span>TEMP. MÁXIMA</span>
+                    <strong>{{tempo.texto}}</strong>
+                    <span>ESTADO TEMPO</span>
                   </li>
                   <li style="padding-top: 10px;">
-                    <strong>29º</strong>
+                    <strong>{{tempo.temp}}F</strong>
                     <span>TEMP. MÁXIMA</span>
                   </li>
                 </ul>

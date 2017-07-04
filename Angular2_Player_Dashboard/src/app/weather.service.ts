@@ -36,7 +36,7 @@ export class WeatherService{
 function toWeather(r:any): Weather{
     let weather = <Weather>({
         cidade: "Braga",
-        temp: r.query.results.channel.item.condition.temp,
+        temp: Number.parseFloat(r.query.results.channel.item.condition.temp),
         texto: r.query.results.channel.item.condition.text
     });
     console.log('Parsed Player:', weather);

@@ -4,6 +4,8 @@ import { Canal } from '../canal';
 import { CanalService } from "../canal.service";
 import { Player } from '../player';
 import { PlayerService } from "../player.service";
+import { Weather } from '../weather';
+import { WeatherService } from "../weather.service";
 import { DomSanitizer } from '@angular/platform-browser';
 
 
@@ -12,13 +14,14 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class DashboardComponent implements OnInit {
   canal : Canal[] = [];
+  tempo : Weather;
   img : String[] = [];
   isLoadingIMG: boolean = true;
   video :any;
   isLoadingVideo: boolean = true;
   feedRss : String[] = [];
   isLoadingFeedRSS: boolean = true;
-  meteo : String[] = [];
+  meteo : string[] = [];
   isLoadingMeteo: boolean = true;
   errorMessage: string = '';
   isLoading: boolean = true;
@@ -26,7 +29,7 @@ export class DashboardComponent implements OnInit {
   errorMessageP: string = '';
   isLoadingP: boolean = true;
 
-  constructor(private canalService: CanalService,private playerService: PlayerService,private _sanitizer: DomSanitizer) { 
+  constructor(private canalService: CanalService,private playerService: PlayerService,private weatherService: WeatherService,private _sanitizer: DomSanitizer) { 
     
   console.log(this.isLoading);
   }
@@ -62,6 +65,14 @@ export class DashboardComponent implements OnInit {
                             }
                             if (!this.isLoadingMeteo)
                             {
+                              this.tempo = {cidade:"Braga",temp:27,texto:"Partly Cloudy"}
+                              /*this.weatherService.getWeather(this.meteo[0]).subscribe(
+                                                      p => {
+                                                            this.tempo = p;
+                                                            //this.tempo.temp = (parseFloat(parseFloat(this.tempo.temp) − 32.0) / 1.8;
+                                                      },
+                                                       e => this.errorMessageP = e,
+                                                       () => this.isLoadingP = false);*/
                             }
                         },
          /* error path*/  e => this.errorMessage = e,
@@ -77,31 +88,6 @@ export class DashboardComponent implements OnInit {
     
   }
 
-  private divideType(c : any){
-    for (let conteudo of c)
-    {
-      if(conteudo.tipo == "Fedd RSS")
-      {
-        this.feedRss.push(conteudo.url);
-        this.isLoadingFeedRSS= false;
-      }
-      else if(conteudo.tipo == "Video")
-      {
-        this.video.push(conteudo.url);
-        this.isLoadingVideo= false;
-      }
-      else if(conteudo.tipo == "Imagem")
-      {
-        this.img.push(conteudo.url);
-        this.isLoadingIMG= false;
-      }
-      else if(conteudo.tipo == "Meteo")
-      {
-        this.meteo.push(conteudo.url);
-        this.isLoadingMeteo= false;
-      }
-    }
-  }
   public brandPrimary: string =  '#20a8d8';
   public brandSuccess: string =  '#4dbd74';
   public brandInfo: string =   '#63c2de';
