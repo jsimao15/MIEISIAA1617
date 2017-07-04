@@ -1,13 +1,107 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Canal } from '../canal';
+import { CanalService } from "../canal.service";
+import { Player } from '../player';
+import { PlayerService } from "../player.service";
+import { DomSanitizer } from '@angular/platform-browser';
+
 
 @Component({
   templateUrl: 'dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
+  canal : Canal[] = [];
+  img : String[] = [];
+  isLoadingIMG: boolean = true;
+  video :any;
+  isLoadingVideo: boolean = true;
+  feedRss : String[] = [];
+  isLoadingFeedRSS: boolean = true;
+  meteo : String[] = [];
+  isLoadingMeteo: boolean = true;
+  errorMessage: string = '';
+  isLoading: boolean = true;
+  player : Player[] = [];
+  errorMessageP: string = '';
+  isLoadingP: boolean = true;
 
-  // constructor( ) { }
+  constructor(private canalService: CanalService,private playerService: PlayerService,private _sanitizer: DomSanitizer) { 
+    
+  console.log(this.isLoading);
+  }
 
+  ngOnInit(){
+    this.canalService
+      .getAll()
+      .subscribe(
+         /* happy path*/  p => {
+                            this.canal = p;
+                            for (let conteudo of (this.canal[0].conteudo))
+                            {
+                              if(conteudo.tipo == "Fedd RSS")
+                              {
+                                this.feedRss.push(conteudo.url);
+                                this.isLoadingFeedRSS= false;
+                              }
+                              else if(conteudo.tipo == "Video")
+                              {
+                                this.video = this._sanitizer.bypassSecurityTrustResourceUrl(conteudo.url.replace("watch?v=","embed/")+"?autoplay=1");
+                                this.isLoadingVideo= false;
+                              }
+                              else if(conteudo.tipo == "Imagem")
+                              {
+                                this.img.push(conteudo.url);
+                                this.isLoadingIMG= false;
+                              }
+                              else if(conteudo.tipo == "Meteo")
+                              {
+                                this.meteo.push(conteudo.url);
+                                this.isLoadingMeteo= false;
+                              }
+                            }
+                            if (!this.isLoadingMeteo)
+                            {
+                            }
+                        },
+         /* error path*/  e => this.errorMessage = e,
+         /* onCompleted*/ () => this.isLoading = false);
+         
+    this.playerService.getAll().subscribe(
+          /* happy path */ p => this.player = p,
+         /* error path */ e => this.errorMessageP = e,
+         /* onCompleted */ () => this.isLoadingP = false);
+         
+    /*console.error(this.player);
+    console.error(this.errorMessage);*/
+    
+  }
+
+  private divideType(c : any){
+    for (let conteudo of c)
+    {
+      if(conteudo.tipo == "Fedd RSS")
+      {
+        this.feedRss.push(conteudo.url);
+        this.isLoadingFeedRSS= false;
+      }
+      else if(conteudo.tipo == "Video")
+      {
+        this.video.push(conteudo.url);
+        this.isLoadingVideo= false;
+      }
+      else if(conteudo.tipo == "Imagem")
+      {
+        this.img.push(conteudo.url);
+        this.isLoadingIMG= false;
+      }
+      else if(conteudo.tipo == "Meteo")
+      {
+        this.meteo.push(conteudo.url);
+        this.isLoadingMeteo= false;
+      }
+    }
+  }
   public brandPrimary: string =  '#20a8d8';
   public brandSuccess: string =  '#4dbd74';
   public brandInfo: string =   '#63c2de';
@@ -460,12 +554,12 @@ export class DashboardComponent implements OnInit {
   public sparklineChartType: string = 'line';
 
 
-  ngOnInit(): void {
+  /*ngOnInit(): void {
     // generate random values for mainChart
     for (let i = 0; i <= this.mainChartElements; i++) {
       this.mainChartData1.push(this.random(50, 200));
       this.mainChartData2.push(this.random(80, 100));
       this.mainChartData3.push(65);
     }
-  }
+  }*/
 }

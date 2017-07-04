@@ -12,6 +12,11 @@ import { SIDEBAR_TOGGLE_DIRECTIVES } from './shared/sidebar.directive';
 import { AsideToggleDirective } from './shared/aside.directive';
 import { BreadcrumbsComponent } from './shared/breadcrumb.component';
 
+// Services
+import { CanalService } from './canal.service';
+import { PlayerService } from './player.service';
+import { WeatherService } from './weather.service';
+
 // Routing Module
 import { AppRoutingModule } from './app.routing';
 
@@ -19,12 +24,16 @@ import { AppRoutingModule } from './app.routing';
 import { FullLayoutComponent } from './layouts/full-layout.component';
 import { SimpleLayoutComponent } from './layouts/simple-layout.component';
 
+// Http
+import { HttpModule } from '@angular/http';
+
 @NgModule({
   imports: [
     BrowserModule,
     AppRoutingModule,
     DropdownModule.forRoot(),
     TabsModule.forRoot(),
+    HttpModule,
     ChartsModule
   ],
   declarations: [
@@ -36,7 +45,7 @@ import { SimpleLayoutComponent } from './layouts/simple-layout.component';
     SIDEBAR_TOGGLE_DIRECTIVES,
     AsideToggleDirective,
   ],
-  providers: [{
+  providers: [CanalService, PlayerService, WeatherService,{
     provide: LocationStrategy,
     useClass: HashLocationStrategy
   }],
