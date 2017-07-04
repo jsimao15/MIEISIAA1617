@@ -1,0 +1,3 @@
+Build da Imagem: docker build --no-cache --tag=mysql-app .
+
+Start da Imagem: docker run --net="bridge" -p 3306:3306 -it mysql-app

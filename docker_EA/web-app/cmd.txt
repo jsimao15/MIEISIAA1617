@@ -1,0 +1,3 @@
+Build da Imagem: docker build --tag=wildfly-app .
+
+Start da Imagem: docker run -p 8080:8080 -it wildfly-app
