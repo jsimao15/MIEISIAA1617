@@ -1,4 +1,4 @@
-import { Component, OnInit, Input,animate } from '@angular/core';
+import { Component, OnInit, Input,AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Canal } from '../canal';
 import { CanalService } from "../canal.service";
@@ -16,7 +16,7 @@ import {StoreDataService} from '../storageData.service';
   templateUrl: 'dashboard.component.html'
 
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements AfterViewInit {
   canal : Canal;
   tempo : Weather;
   img : String[] = [];
@@ -35,9 +35,21 @@ export class DashboardComponent implements OnInit {
 
   constructor(private storeDataService: StoreDataService,private route:ActivatedRoute,private canalService: CanalService,private playerService: PlayerService,private weatherService: WeatherService,private authService: AuthServ,private _sanitizer: DomSanitizer) { 
   
-  animate(10000000);
   
-    this.canalService
+    
+ 
+        
+    
+  }
+
+
+  ngAfterViewInit(){
+
+    this.playerService.getAll().subscribe(
+           p => this.player = p,
+          e => this.errorMessageP = e,
+          () => {
+       this.canalService
       .get(localStorage.getItem('playerID'))
       .subscribe(
           p => {
@@ -79,16 +91,8 @@ export class DashboardComponent implements OnInit {
                         },
            e => this.errorMessage = e,
           () => this.isLoading = false);
-         
-    this.playerService.getAll().subscribe(
-           p => this.player = p,
-          e => this.errorMessageP = e,
-          () => this.isLoadingP = false);
-        
+          });
     
   }
-
-
-  ngOnInit(){}
   
 }
