@@ -16,6 +16,8 @@ import { BreadcrumbsComponent } from './shared/breadcrumb.component';
 import { CanalService } from './canal.service';
 import { PlayerService } from './player.service';
 import { WeatherService } from './weather.service';
+import { AuthServ } from './auth.service';
+import {StoreDataService} from './storageData.service';
 
 // Routing Module
 import { AppRoutingModule } from './app.routing';
@@ -45,7 +47,7 @@ import { HttpModule } from '@angular/http';
     SIDEBAR_TOGGLE_DIRECTIVES,
     AsideToggleDirective,
   ],
-  providers: [CanalService, PlayerService, WeatherService,{
+  providers: [CanalService, PlayerService, WeatherService,StoreDataService, AuthServ,{
     provide: LocationStrategy,
     useClass: HashLocationStrategy
   }],

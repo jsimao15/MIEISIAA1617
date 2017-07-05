@@ -8,22 +8,17 @@ import 'rxjs/add/observable/throw';
 
 import { Canal } from './canal';
 
-/*const CANAL : Canal[] = [
-      {id: 1, descricao: 'descricao do Canal1', nome: 'nome do canal1', conteudo: [{idCont : 1,url: 'jn.pt',tipo:'tipo do conteudo1'}]},
-      {id: 2, descricao: 'descricao do Canal2', nome: 'nome do canal2', conteudo: [{idCont : 2,url: 'ojogo.pt',tipo:'tipo do conteudo2'}]},
-      {id: 3, descricao: 'descricao do Canal3', nome: 'nome do canal3', conteudo: [{idCont : 3,url: 'aaaaa.pt',tipo:'tipo do conteudo3'}]}
-];*/
 
 @Injectable()
-export class CanalService{
+export class AuthServ{
   private baseUrl: string = 'http://localhost:8080/dsignage/rest';
   constructor(private http : Http){
   }
 
-  getAll(): Observable<Canal[]>{
+  getCanalByAuth(user: string,p: string): Observable<Canal>{
     let canal$ = this.http
-      .get(`${this.baseUrl}/canal`, { headers: this.getHeaders()})
-      .map(mapCanais)
+      .get(`${this.baseUrl}/player/login/${user}/${p}`, { headers: this.getHeaders()})
+      .map(mapCanal)
       .catch(handleError);
       return canal$;
   }
@@ -35,9 +30,9 @@ export class CanalService{
     headers.append('Accept', 'application/json');
     return headers;
   }
-  get(nome: string): Observable<Canal> {
+  get(id: number): Observable<Canal> {
     let canal$ = this.http
-      .get(`${this.baseUrl}/canal/${nome}`, {headers: this.getHeaders()})
+      .get(`${this.baseUrl}/canal/${id}`, {headers: this.getHeaders()})
       .map(mapCanal)
       .catch(handleError);
       return canal$;
@@ -82,7 +77,7 @@ function toCanal(r:any): Canal{
         console.log('pushado:', auxConteudo);
     }
     let canal = <Canal>({
-        id: r.idConteudo,
+        id: r.id,
         descricao: r.descricao,
         nome: r.nome,
         conteudo: auxConteudo
@@ -100,6 +95,7 @@ function extractId(canalData:any){
 }
 
 function mapCanal(response:Response): Canal{
+console.log("Sup");                 
    // toCanal looks just like in the previous example
    return toCanal(response.json());
 }
